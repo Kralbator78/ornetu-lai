@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ORNETU LAÏ — Télécharger l'application Android</title>
+  <meta name="description" content="Téléchargez l'application Android ORNETU LAÏ pour consulter nos recettes, productions et notre histoire." />
+  <style>
+    :root {
+      --vert: #294733;
+      --vert-2: #3e5e47;
+      --vert-3: #5f7a60;
+      --papier: #fff7e7;
+      --papier-2: #f7f0df;
+      --brun: #9b815e;
+      --brun-2: #c0ab8b;
+      --creme: #fcfaf4;
+      --ombre: rgba(35, 53, 39, 0.14);
+      --blanc: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(192,171,139,.25), transparent 20%),
+        radial-gradient(circle at 85% 20%, rgba(94,122,96,.18), transparent 22%),
+        linear-gradient(180deg, #f8f3e7 0%, #efe6d4 100%);
+      color: var(--vert);
+      min-height: 100vh;
+    }
+
+    .page {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      padding: 36px 22px 44px;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(4px);
+    }
+
+    .hero::before {
+      width: 340px;
+      height: 340px;
+      background: rgba(155,129,94,.08);
+      top: -120px;
+      right: -120px;
+    }
+
+    .hero::after {
+      width: 260px;
+      height: 260px;
+      background: rgba(41,71,51,.07);
+      bottom: -120px;
+      left: -100px;
+    }
+
+    .hero-card {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
+      background: rgba(255, 247, 231, 0.96);
+      border: 1px solid rgba(155,129,94,.28);
+      border-radius: 30px;
+      box-shadow: 0 24px 60px var(--ombre);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-left {
+      padding: 54px 46px 42px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.08)),
+        linear-gradient(135deg, rgba(255,247,231,1), rgba(247,240,223,1));
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.65);
+      border: 1px solid rgba(155,129,94,.25);
+      color: var(--brun);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--vert);
+      box-shadow: 0 0 0 5px rgba(41,71,51,.08);
+    }
+
+    h1 {
+      margin: 24px 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(42px, 7vw, 68px);
+      line-height: 0.98;
+      letter-spacing: .5px;
+      color: var(--vert);
+    }
+
+    .sub-brand {
+      margin: 0 0 18px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--brun);
+      font-weight: 700;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 620px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #4c6454;
+    }
+
+    .feature-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 26px 0 10px;
+    }
+
+    .chip {
+      padding: 11px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.7);
+      border: 1px solid rgba(155,129,94,.25);
+      color: var(--vert);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 17px 22px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+      min-width: 230px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, var(--vert-2), var(--vert));
+      color: white;
+      box-shadow: 0 14px 26px rgba(41,71,51,.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 28px rgba(41,71,51,.24);
+    }
+
+    .btn-secondary {
+      color: var(--vert);
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(155,129,94,.25);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.9);
+    }
+
+    .note {
+      margin-top: 24px;
+      padding: 18px 18px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.68);
+      border: 1px solid rgba(155,129,94,.22);
+      color: #5a645e;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .note strong { color: var(--vert); }
+
+    .hero-right {
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(41,71,51,.06), rgba(41,71,51,.02)),
+        linear-gradient(180deg, #f5ecda, #eee0c7);
+      padding: 34px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .visual-stack {
+      width: 100%;
+      max-width: 360px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .mini-card {
+      width: 100%;
+      border-radius: 24px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(155,129,94,.25);
+      box-shadow: 0 10px 24px rgba(41,71,51,.08);
+      overflow: hidden;
+    }
+
+    .phone {
+      width: min(100%, 320px);
+      aspect-ratio: 9 / 18;
+      border-radius: 34px;
+      background: linear-gradient(180deg, #223829 0%, #324b36 100%);
+      border: 8px solid #1f2e22;
+      box-shadow: 0 24px 46px rgba(0,0,0,.18);
+      padding: 18px 15px 16px;
+      position: relative;
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 118px;
+      height: 18px;
+      border-radius: 0 0 16px 16px;
+      background: #18261b;
+    }
+
+    .screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(155,129,94,.18), transparent 28%),
+        linear-gradient(180deg, #fff9ee 0%, #f7efdd 100%);
+      padding: 20px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .screen::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 68px;
+      height: 78px;
+      background:
+        linear-gradient(180deg, rgba(41,71,51,.0), rgba(41,71,51,.07)),
+        linear-gradient(135deg, rgba(155,129,94,.22), rgba(155,129,94,.06));
+      clip-path: polygon(0% 100%, 18% 62%, 30% 78%, 43% 52%, 58% 70%, 72% 44%, 88% 67%, 100% 46%, 100% 100%);
+      border-radius: 16px;
+      opacity: .92;
+    }
+
+    .screen-top {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .screen-mini {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--brun);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .screen-brand {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      line-height: 1.05;
+      color: var(--vert);
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .screen-sub {
+      margin: 12px auto 0;
+      max-width: 220px;
+      color: #596b5f;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .screen-bottom {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 10px;
+    }
+
+    .line-box {
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(155,129,94,.22);
+      border-radius: 14px;
+      padding: 11px 12px;
+      font-size: 13px;
+      color: var(--vert);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 22px 44px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .info-card {
+      background: rgba(255,247,231,.92);
+      border: 1px solid rgba(155,129,94,.24);
+      border-radius: 22px;
+      padding: 22px 20px;
+      box-shadow: 0 14px 28px rgba(41,71,51,.07);
+    }
+
+    .info-card h3 {
+      margin: 0 0 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 23px;
+      color: var(--vert);
+    }
+
+    .info-card p, .info-card li {
+      color: #536459;
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .steps {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .footer {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 22px 42px;
+    }
+
+    .footer-box {
+      text-align: center;
+      padding: 22px 18px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(41,71,51,.95), rgba(50,75,54,.95));
+      color: rgba(255,255,255,.94);
+      box-shadow: 0 18px 30px rgba(41,71,51,.18);
+    }
+
+    .footer-box strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 24px;
+      margin-bottom: 8px;
+      letter-spacing: .3px;
+    }
+
+    .footer-box span {
+      font-size: 14px;
+      color: rgba(255,255,255,.82);
+    }
+
+    @media (max-width: 980px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left {
+        padding: 40px 24px 26px;
+      }
+
+      .hero-right {
+        padding-top: 8px;
+        padding-bottom: 32px;
+      }
+
+      .section-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero {
+        padding: 18px 14px 26px;
+      }
+
+      .section,
+      .footer {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .cta-row {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+        min-width: unset;
+      }
+
+      .feature-row {
+        gap: 10px;
+      }
+
+      .chip {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-left">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> Application Android officielle</div>
+          <h1>ORNETU LAÏ</h1>
+          <div class="sub-brand">Liqueurs familiales · Paese di Ornetu</div>
+          <p class="lead">
+            Téléchargez l'application Android ORNETU LAÏ pour consulter nos recettes, nos productions,
+            notre histoire et l'univers de nos liqueurs familiales, directement depuis votre téléphone.
+          </p>
+
+          <div class="feature-row">
+            <div class="chip">Mode visiteur immédiat</div>
+            <div class="chip">Recettes & productions</div>
+            <div class="chip">Notre histoire</div>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://drive.google.com/uc?export=download&id=1YLN_k9Jwny0GAcZyBQk4uQOJhQRth5aw">
+              Télécharger l'application Android
+            </a>
+            <a class="btn btn-secondary" href="https://drive.google.com/file/d/1YLN_k9Jwny0GAcZyBQk4uQOJhQRth5aw/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+              Voir le fichier téléchargé
+            </a>
+          </div>
+
+          <div class="note">
+            <strong>Conseil d'installation :</strong> après le téléchargement, Android peut demander
+            l'autorisation d'installer une application depuis votre navigateur. Cette version est conçue
+            pour la <strong>consultation</strong> des contenus publics ORNETU LAÏ.
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="visual-stack">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <div class="screen-top">
+                  <div class="screen-mini">ORNETU LAÏ</div>
+                  <p class="screen-brand">Liqueurs<br>familiales</p>
+                  <div class="screen-sub">Une expérience simple, douce et élégante, dans l'esprit de l'application.</div>
+                </div>
+
+                <div class="screen-bottom">
+                  <div class="line-box">Téléchargement Android</div>
+                  <div class="line-box">Consultation en mode visiteur</div>
+                  <div class="line-box">Recettes · Productions · Histoire</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mini-card">
+              <div style="padding:18px 18px 16px; text-align:center; color:var(--vert);">
+                <div style="font-family:Georgia, 'Times New Roman', serif; font-size:22px; font-weight:700; margin-bottom:8px;">Téléchargement simple</div>
+                <div style="font-size:14px; line-height:1.6; color:#5a685f;">
+                  Scannez le QR code, ouvrez la page, téléchargez l'application et profitez d'ORNETU LAÏ sur Android.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-grid">
+        <article class="info-card">
+          <h3>Ce que vous trouverez</h3>
+          <p>
+            Consultez les recettes, les productions en cours, notre histoire et les contenus publics de l'univers ORNETU LAÏ.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <h3>Installation</h3>
+          <ol class="steps">
+            <li>Téléchargez le fichier Android.</li>
+            <li>Autorisez l'installation si nécessaire.</li>
+            <li>Ouvrez ORNETU LAÏ en mode visiteur.</li>
+          </ol>
+        </article>
+
+        <article class="info-card">
+          <h3>Version de test</h3>
+          <p>
+            Cette page est conçue pour un partage simple avec quelques proches, avant la version finale complète avec toutes les photographies en ligne.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-box">
+        <strong>LAÏ · ORNETU</strong>
+        <span>Une présentation fidèle à l'identité douce, chaleureuse et élégante de ton application.</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
